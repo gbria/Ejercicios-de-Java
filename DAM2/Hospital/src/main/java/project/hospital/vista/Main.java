@@ -11,5 +11,6 @@ public class Main {
         ArrayList<Metge> metges = new ArrayList<>();
 
         metges = MetgeDAO.getHospitalMetges();
+        System.out.println(metges);
     }
 }
