@@ -4,11 +4,11 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class InfermerDAO {
-    private static final String DB_URL = "jdbc:postgres://tyke.db.elephantsql.com/irmktuvg";
+    private static final String DB_URL = "jdbc:postgresql://surus.db.elephantsql.com/kgoicfvc";
 
-    private static final String DB_USER = "irmktuvg";
+    private static final String DB_USER = "kgoicfvc";
 
-    private static final String DB_PASSWD = "iiXhfkefM1ki9GBoR1EcU0HFdzQVaweJ";
+    private static final String DB_PASSWD = "X1ljbK7jBcrct6TtLDWiQPmmTg14LjO9";
 
     public static ArrayList<Infermer> getHospitalInfermers() {
         ArrayList<Infermer> infermers = new ArrayList<>();

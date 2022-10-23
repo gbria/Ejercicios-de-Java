@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 public class MetgeDAO {
 
-    private static final String DB_URL = "jdbc:postgres://tyke.db.elephantsql.com/irmktuvg";
+    private static final String DB_URL = "jdbc:postgresql://surus.db.elephantsql.com/kgoicfvc";
 
-    private static final String DB_USER = "irmktuvg";
+    private static final String DB_USER = "kgoicfvc";
 
-    private static final String DB_PASSWD = "iiXhfkefM1ki9GBoR1EcU0HFdzQVaweJ";
+    private static final String DB_PASSWD = "X1ljbK7jBcrct6TtLDWiQPmmTg14LjO9";
 
     /**
      * Consulta los datos de los medicos
@@ -29,12 +29,12 @@ public class MetgeDAO {
 
             while (result.next()) {
                 Metge metge = new Metge();
-                metge.setNif(result.getString("nif"));
+                metge.setNif(result.getString("nifmetge"));
                 metge.setNom(result.getString("nom"));
                 metge.setCognom(result.getString("cognom"));
                 metge.setEspecialitat(result.getString("especialitat"));
                 metge.setCorreu(result.getString("correu"));
-                metge.setHoresExtres(result.getInt("hora extra"));
+                metge.setHoresExtres(result.getInt("horaextra"));
 
                 metges.add(metge);
             }
