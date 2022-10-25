@@ -6,22 +6,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Controller {
-    public static ArrayList consultaPersona(String nombre) {
+    public static ArrayList getPerson(String nombre) {
         if (nombre.equals("pacient")) {
-            ArrayList<Pacient> pacients = new ArrayList<>();
-            pacients = PacientDAO.getHospitalPacients();
-            return pacients;
+            ArrayList<Patient> patients = new ArrayList<>();
+            patients = PatientDAO.getHospitalPatients();
+            return patients;
         } else if (nombre.equals("metge")) {
-            ArrayList<Metge> metges = new ArrayList<>();
-            metges = MetgeDAO.getHospitalMetges();
+            ArrayList<Doctor> doctors = new ArrayList<>();
+            doctors = DoctorDAO.getHospitalDoctors();
         } else {
-            ArrayList<Infermer> infermers = new ArrayList<>();
-            infermers = InfermerDAO.getHospitalInfermers();
+            ArrayList<Nurse> nurses = new ArrayList<>();
+            nurses = NurseDAO.getHospitalNurse();
         }
         return null;
     }
 
-    public static boolean deletePersona(String nombre, String nif) {
+    public static boolean deletePerson(String nombre, String dni) {
         boolean check = false;
         if (nombre.equals("pacient")) {
             //check=deletePacient(nif);
@@ -34,74 +34,86 @@ public class Controller {
 
     }
 
-    public static boolean addPacient(Pacient pacient) {
+    public static boolean addPatient(Patient patient) {
         boolean check = false;
-        check = PacientDAO.addPacient(pacient);
+        check = PatientDAO.addPacient(patient);
         return check;
     }
 
-    public static boolean addMetge(Metge metge) {
+    public static boolean addDoctor(Doctor doctor) {
         boolean check = false;
-        check = MetgeDAO.addMetge(metge);
+        check = DoctorDAO.addDoctor(doctor);
         return check;
 
     }
 
-    public static boolean addInfermer(Infermer infermer) {
+    public static boolean addNurse(Nurse nurse) {
         boolean check = false;
-        check = InfermerDAO.addInfermer(infermer);
+        check = NurseDAO.addNurse(nurse);
         return check;
     }
 
-    public static ArrayList<Pacient> consultaOpera() {
-        ArrayList<Pacient> pacients = new ArrayList<>();
-        //pacients = PacientDAO.addPacient()
-        return pacients;
+    public static ArrayList<Patient> consultaOpera() {
+        ArrayList<Patient> patients = new ArrayList<>();
+        patients = PatientDAO.getSurgicalOperation();
+        return patients;
     }
 
-    //REVISAR!!!!!!
-    public static String consultaEspecialitat() {
-        String espAux;
+
+    public static String querySpeciality() {
+        String speAux;
         String consultaEsp = "";
-        String name, cognom, especialitat;
-        ArrayList<Metge> metges = new ArrayList<>();
-        metges = MetgeDAO.getEspecialitatMetges();
+        String name, surname, speciality;
+        ArrayList<Doctor> doctors = new ArrayList<>();
+        doctors = DoctorDAO.getMedicalSpeciality();
 
-        Iterator<Metge> it = metges.iterator();
+        Iterator<Doctor> it = doctors.iterator();
 
         while (it.hasNext()) {
-            Metge metge = new Metge();
-            metge = it.next();
-            name = metge.getNom();
-            cognom = metge.getCognom();
-            espAux = metge.getEspecialitat();
+            Doctor doctor = new Doctor();
+            doctor = it.next();
+            name = doctor.getName();
+            surname = doctor.getSurname();
+            speAux = doctor.getSpeciality();
             //HACER QUE PASE TODOS LOS MÉDICOS DE UNA ESPECIALIDAD ANTES DE PASAR AL SIGUIENTE
 
-            especialitat = metge.getEspecialitat();
-            consultaEsp += name + " " + cognom + "\n";
+            speciality = doctor.getSpeciality();
+            consultaEsp += name + " " + surname + "\n";
 
         }
         return consultaEsp;
     }
 
-    public static String getMetgeByEspecialitat() {
-        String consultaEsp = "";
-        String name, cognom, especialitat;
-        ArrayList<Metge> metges = new ArrayList<>();
-        metges = MetgeDAO.getEspecialitats();
+    public static String getDoctorBySpeciality() {
+        String infoSpeciality = "";
+        String name, surname, speciality;
+        ArrayList<Doctor> doctors = new ArrayList<>();
+        doctors = DoctorDAO.getMedicalSpeciality();
 
-        Iterator<Metge> it = metges.iterator();
+        Iterator<Doctor> it = doctors.iterator();
 
         while (it.hasNext()) {
-            Metge metge = new Metge();
-            metge = it.next();
-            cognom = metge.getCognom();
-            name = metge.getNom();
-            especialitat = metge.getEspecialitat();
-            consultaEsp += name + " " + cognom + ": " + especialitat + "\n";
+            Doctor doctor = new Doctor();
+            doctor = it.next();
+            surname = doctor.getSurname();
+            name = doctor.getName();
+            speciality = doctor.getSpeciality();
+            infoSpeciality += name + " " + surname + ": " + speciality + "\n";
 
         }
-        return consultaEsp;
+        return infoSpeciality;
+    }
+
+    public static ArrayList<Consulta> getHospitalConsultaBySpeciality(String speciality){
+        ArrayList<Consulta> consultas = new ArrayList<>();
+        consultas = ConsultaDAO.getHospitalConsultaBySpeciality(speciality);
+        return consultas;
+    }
+
+        public static ArrayList<Consulta> getHospitalConsultaByMetge(String nif){
+        ArrayList<Consulta> consultas = new ArrayList<>();
+        consultas = ConsultaDAO.getHospitalConsultaBySpeciality(nif);
+        return consultas;
     }
 
 }

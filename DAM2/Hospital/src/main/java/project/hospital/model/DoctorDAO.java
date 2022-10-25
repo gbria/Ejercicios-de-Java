@@ -3,19 +3,15 @@ package project.hospital.model;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class MetgeDAO {
-
+public class DoctorDAO {
     private static final String DB_URL = "jdbc:postgresql://surus.db.elephantsql.com/kgoicfvc";
-
     private static final String DB_USER = "kgoicfvc";
-
     private static final String DB_PASSWD = "X1ljbK7jBcrct6TtLDWiQPmmTg14LjO9";
 
-    /**
-     * Consulta los datos de los medicos
-     */
-    public static ArrayList<Metge> getHospitalMetges() {
-        ArrayList<Metge> metges = new ArrayList<>();
+
+    //Consultar los datos de los/las doctores/as
+    public static ArrayList<Doctor> getHospitalDoctors() {
+        ArrayList<Doctor> doctors = new ArrayList<>();
         Connection dbconnection = null;
         Statement statement = null;
         ResultSet result = null;
@@ -24,19 +20,22 @@ public class MetgeDAO {
         try {
             dbconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconnection.createStatement();
-            sql = "SELECT * FROM Metge";
+            sql = "SELECT * FROM Doctor";
             result = statement.executeQuery(sql);
 
             while (result.next()) {
-                Metge metge = new Metge();
-                metge.setNif(result.getString("nifmetge"));
-                metge.setNom(result.getString("nom"));
-                metge.setCognom(result.getString("cognom"));
-                metge.setEspecialitat(result.getString("especialitat"));
-                metge.setCorreu(result.getString("correu"));
-                metge.setHoresExtres(result.getInt("horaextra"));
+                Doctor doctor = new Doctor();
+                doctor.setDni(result.getString("DniDoctor"));
+                doctor.setName(result.getString("Name"));
+                doctor.setSurname(result.getString("Surname"));
+                doctor.setSpeciality(result.getString("Speciality"));
+                doctor.setEmail(result.getString("Email"));
+                doctor.setTimetable(result.getString("TimeTable"));
+                doctor.setExtraHour(result.getInt("ExtraHour"));
+                doctor.setPhone(result.getInt("Phone"));
 
-                metges.add(metge);
+
+                doctors.add(doctor);
             }
 
             result.close();
@@ -45,13 +44,12 @@ public class MetgeDAO {
         } catch (SQLException sqle) {
             sqle.printStackTrace();
         }
-        return metges;
+        return doctors;
     }
 
-    /**
-     * Añade nuevo medico
-     */
-    public static boolean addMetge(Metge metge) {
+
+    //Añadir un nuevo doctor/a
+    public static boolean addDoctor(Doctor doctor) {
         boolean check = false;
         Connection dbconnection = null;
         Statement statement = null;
@@ -61,16 +59,16 @@ public class MetgeDAO {
         try {
             dbconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconnection.createStatement();
-            sql = "INSERT INTO Metge (Nif, Nom, Cognom, Correu, Telefon, Horari, Especialitat, HoraExtra)" +
-                    " VALUES ('" + metge.getNif().replaceAll("'", "@") + "'," +
-                    "'" + metge.getNom().replaceAll("'", "@") + "'," +
-                    "'" + metge.getCognom().replaceAll("'", "@") + "'," +
-                    "'" + metge.getCorreu().replaceAll("'", "@") + "'," +
-                    "'" + metge.getTelefon() + "'," +
-                    "'" + metge.getHorari().replaceAll("'", "@") + "'," +
-                    "'" + metge.getEspecialitat().replaceAll("'", "@") + "'," +
-                    "'" + metge.getHoresExtres() + "'," +
-                    "'" + metge.getCorreu().replaceAll("'", "@") + ");";
+            sql = "INSERT INTO Doctor(DniDoctor, Name, Surname, Speciality, Email, Timetable, ExtraHour, Phone)" +
+                    " VALUES ('" + doctor.getDni().replaceAll("'", "@") + "'," +
+                    "'" + doctor.getName().replaceAll("'", "@") + "'," +
+                    "'" + doctor.getSurname().replaceAll("'", "@") + "'," +
+                    "'" + doctor.getSpeciality().replaceAll("'", "@") + "'," +
+                    "'" + doctor.getEmail().replaceAll("'", "@") + "'," +
+                    "'" + doctor.getTimetable().replaceAll("'", "@") + "'," +
+                    "'" + doctor.getExtraHour() + "'," +
+                    "'" + doctor.getPhone() + ");";
+
             System.out.println(sql);
 
             nrows = statement.executeUpdate(sql);
@@ -90,10 +88,9 @@ public class MetgeDAO {
 
     }
 
-    /**
-     * Elimina medico
-     */
-    public static boolean deletePersona(String nif) {
+
+    //Eliminar un doctor/a
+    public static boolean deletePerson(String dniDoctor) {
         Connection dbconection = null;
         Statement statement = null;
         String sql;
@@ -101,7 +98,7 @@ public class MetgeDAO {
         try {
             dbconection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconection.createStatement();
-            sql = "delete from Metge where nif=" + nif + ";";
+            sql = "DELETE FROM Doctor WHERE DniDoctor=" + dniDoctor + ";";
             nrows = statement.executeUpdate(sql);
             statement.close();
             dbconection.close();
@@ -115,11 +112,10 @@ public class MetgeDAO {
         }
     }
 
-    /**
-     * Consulta los medicos que tengan una especialidad en particular
-     */
-    public static ArrayList<Metge> getEspecialitatMetges() {
-        ArrayList<Metge> metges = new ArrayList<>();
+
+    //Consultar los/las doctores/as según su especialidad
+    public static ArrayList<Doctor> getMedicalSpeciality() {
+        ArrayList<Doctor> doctors = new ArrayList<>();
         Connection dbconnection = null;
         Statement statement = null;
         ResultSet result = null;
@@ -128,15 +124,15 @@ public class MetgeDAO {
         try {
             dbconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconnection.createStatement();
-            sql = "SELECT Nom, Cognom, Especialitat FROM Metge ORDER BY especialitat;";
+            sql = "SELECT Name, Surname, Speciality FROM Doctor ORDER BY Speciality;";
             result = statement.executeQuery(sql);
 
             while (result.next()) {
-                Metge metge = new Metge();
-                metge.setNom(result.getString("nom"));
-                metge.setCognom(result.getString("cognom"));
-                metge.setEspecialitat(result.getString("especialitat"));
-                metges.add(metge);
+                Doctor doctor = new Doctor();
+                doctor.setName(result.getString("Name"));
+                doctor.setSurname(result.getString("Surname"));
+                doctor.setSpeciality(result.getString("Speciality"));
+                doctors.add(doctor);
             }
 
             result.close();
@@ -145,11 +141,13 @@ public class MetgeDAO {
         } catch (SQLException sqle) {
             sqle.printStackTrace();
         }
-        return metges;
+        return doctors;
     }
 
-    public static ArrayList<Metge> getEspecialitats() {
-        ArrayList<Metge> metges = new ArrayList<>();
+    //Mostrar un listado de las diferentes especialidades médicas en el hospital ordenadas por los
+    //apellidos de los/las doctores/as
+    public static ArrayList<Doctor> getSpeciality() {
+        ArrayList<Doctor> doctors = new ArrayList<>();
         Connection dbconnection = null;
         Statement statement = null;
         ResultSet result = null;
@@ -158,15 +156,15 @@ public class MetgeDAO {
         try {
             dbconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconnection.createStatement();
-            sql = "SELECT Cognom, Nom, Especialitat FROM Metge ORDER BY Cognom DESC;";
+            sql = "SELECT Surname, Name, Speciality FROM Doctor ORDER BY Surname DESC";
             result = statement.executeQuery(sql);
 
             while (result.next()) {
-                Metge metge = new Metge();
-                metge.setCognom(result.getString("cognom"));
-                metge.setNom(result.getString("nom"));
-                metge.setEspecialitat(result.getString("especialitat"));
-                metges.add(metge);
+                Doctor doctor = new Doctor();
+                doctor.setSurname(result.getString("Surname"));
+                doctor.setName(result.getString("Name"));
+                doctor.setSpeciality(result.getString("Speciality"));
+                doctors.add(doctor);
             }
 
             result.close();
@@ -175,7 +173,7 @@ public class MetgeDAO {
         } catch (SQLException sqle) {
             sqle.printStackTrace();
         }
-        return metges;
+        return doctors;
     }
 
 

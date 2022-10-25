@@ -3,15 +3,15 @@ package project.hospital.model;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class InfermerDAO {
+public class NurseDAO {
     private static final String DB_URL = "jdbc:postgresql://surus.db.elephantsql.com/kgoicfvc";
-
     private static final String DB_USER = "kgoicfvc";
-
     private static final String DB_PASSWD = "X1ljbK7jBcrct6TtLDWiQPmmTg14LjO9";
 
-    public static ArrayList<Infermer> getHospitalInfermers() {
-        ArrayList<Infermer> infermers = new ArrayList<>();
+
+    //Consultar los datos de los/las enfermeros/as
+    public static ArrayList<Nurse> getHospitalNurse() {
+        ArrayList<Nurse> nurses = new ArrayList<>();
         Connection dbconnection = null;
         Statement statement = null;
         ResultSet result = null;
@@ -20,18 +20,19 @@ public class InfermerDAO {
         try {
             dbconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconnection.createStatement();
-            sql = "SELECT * FROM Infermer";
+            sql = "SELECT * FROM Nurse";
             result = statement.executeQuery(sql);
 
             while (result.next()) {
-                Infermer infermer = new Infermer();
-                infermer.setNif(result.getString("nif"));
-                infermer.setNom(result.getString("nom"));
-                infermer.setCognom(result.getString("cognom"));
-                infermer.setTelefon(result.getInt("telefon"));
-                infermer.setHorari(result.getString("horari"));
+                Nurse nurse = new Nurse();
+                nurse.setDni(result.getString("DniNurse"));
+                nurse.setName(result.getString("Name"));
+                nurse.setSurname(result.getString("Surname"));
+                nurse.setEmail(result.getString("Email"));
+                nurse.setTimeTable(result.getString("TimeTable"));
+                nurse.setPhone(result.getInt("Phone"));
 
-                infermers.add(infermer);
+                nurses.add(nurse);
             }
 
             result.close();
@@ -41,10 +42,12 @@ public class InfermerDAO {
             sqle.printStackTrace();
         }
 
-        return infermers;
+        return nurses;
     }
 
-    public static boolean addInfermer(Infermer infermer) {
+
+    //Añadir un/a nuevo/a enfermero/a
+    public static boolean addNurse(Nurse nurse) {
 
         boolean check = false;
         Connection dbconnection = null;
@@ -55,13 +58,14 @@ public class InfermerDAO {
         try {
             dbconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconnection.createStatement();
-            sql = "INSERT INTO Infermer (Nif, Nom, Cognom, Correu, Telefon, Horari)" +
-                    " VALUES ('" + infermer.getNif().replaceAll("'", "@") + "'," +
-                    "'" + infermer.getNom().replaceAll("'", "@") + "'," +
-                    "'" + infermer.getCognom().replaceAll("'", "@") + "'," +
-                    "'" + infermer.getCorreu().replaceAll("'", "@") + "'," +
-                    "'" + infermer.getTelefon() + "'," +
-                    "'" + infermer.getHorari().replaceAll("'", "@") + "'," + ");";
+            sql = "INSERT INTO Nurse(DniNurse, Name, Surname, Email, TimeTable, Phone)" +
+                    " VALUES ('" + nurse.getDni().replaceAll("'", "@") + "'," +
+                    "'" + nurse.getName().replaceAll("'", "@") + "'," +
+                    "'" + nurse.getSurname().replaceAll("'", "@") + "'," +
+                    "'" + nurse.getEmail().replaceAll("'", "@") + "'," +
+                    "'" + nurse.getTimeTable().replaceAll("'", "@") + "'," +
+                    "'" + nurse.getPhone() + ");";
+
             System.out.println(sql);
 
             nrows = statement.executeUpdate(sql);
@@ -81,7 +85,7 @@ public class InfermerDAO {
 
     }
 
-    public static boolean deleteInfermer(String nif) {
+    public static boolean deleteNurse(String dniNurse) {
         Connection dbconection = null;
         Statement statement = null;
         String sql;
@@ -89,7 +93,7 @@ public class InfermerDAO {
         try {
             dbconection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconection.createStatement();
-            sql = "delete from Infermer where nif=" + nif + ";";
+            sql = "DELETE FROM Nurse WHERE DniNurse = " + dniNurse + ";";
             nrows = statement.executeUpdate(sql);
             statement.close();
             dbconection.close();
