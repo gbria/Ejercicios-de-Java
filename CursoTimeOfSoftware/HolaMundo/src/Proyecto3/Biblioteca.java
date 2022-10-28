@@ -4,48 +4,49 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Biblioteca {
-    //Atributo Biblioteca
     private List<Libro> LibrosBiblioteca;
 
-    //Constructor parametrizado
     public Biblioteca() {
-        LibrosBiblioteca = new ArrayList<>();
+        LibrosBiblioteca = new ArrayList<Libro>();
     }
 
-    //Función que devuelve el número de libros
-    public int NumeroLibros() {
+    //Devuelve el número de libros de la biblioteca
+    public int NumeroLibrosBiblioteca() {
         return LibrosBiblioteca.size();
     }
 
-    //Método para añadir libros
-    public void AddLibro(Libro libro) {
+    //Añadir libro en la biblioteca
+    public void AddLibroBiblioteca(Libro libro) {
         LibrosBiblioteca.add(libro);
     }
 
-    //Eliminar libro por el título
-    public void BorraLibro(String titulo) {
-        Boolean encontrado = false;
-        int posicionABorrar = -1;
-        for (Libro libro: LibrosBiblioteca) {
-            posicionABorrar++;
-            if (libro.GetTitulo().equals(titulo)){
+    //Borrar un libro de la biblioteca a partir del título
+    public void RemoveLibroBiblioteca(String titulo) {
+        boolean encontrado = false;
+        int posicioLibro = -1;
+
+        for (Libro libro : LibrosBiblioteca) {
+            posicioLibro++;
+            if (libro.GetTitulo().equals(titulo)) {
                 encontrado = true;
                 break;
             }
         }
-        if (encontrado){
-            LibrosBiblioteca.remove(posicionABorrar);
-            System.out.println("Libro borrado correctamente");
-        }else {
-            System.out.println("Libro no encontrado");
+
+        if (encontrado) {
+            LibrosBiblioteca.remove(posicioLibro);
+            System.out.println("El libro " + "\"" + titulo + "\"" + " ha sido borrado de la biblioteca");
+        } else {
+            System.out.println("El libro no se ha encontrado");
         }
+
     }
-    //Mostrar los libros de la Biblioteca
-    public void MostrarBiblioteca(){
-        System.out.println("***** BIBLIOTECA *****");
+
+    //Mostrar todos los libros de la biblioteca
+    public void MostrarBiblioteca() {
+        System.out.println("## Biblioteca ##");
         for (Libro libro : LibrosBiblioteca) {
             libro.MostrarLibro();
-            System.out.println("**********************");
         }
     }
 }
