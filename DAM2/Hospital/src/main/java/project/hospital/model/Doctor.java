@@ -12,8 +12,8 @@ public class Doctor extends Person {
         this.extraHour = 0;
     }
 
-    public Doctor(String dni, String name, String surname, String email, int phone, String timetable, String speciality, int extraHour) {
-        super(dni, name, surname, email, phone);
+    public Doctor(String dni, String firstName, String lastName, String email, int phone, String timetable, String speciality, int extraHour) {
+        super(dni, firstName, lastName, email, phone);
         this.timetable = timetable;
         this.speciality = speciality;
         this.extraHour = extraHour;

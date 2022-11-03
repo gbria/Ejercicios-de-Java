@@ -26,8 +26,8 @@ public class DoctorDAO {
             while (result.next()) {
                 Doctor doctor = new Doctor();
                 doctor.setDni(result.getString("DniDoctor"));
-                doctor.setName(result.getString("Name"));
-                doctor.setSurname(result.getString("Surname"));
+                doctor.setFirstName(result.getString("FirstName"));
+                doctor.setLastName(result.getString("LastName"));
                 doctor.setSpeciality(result.getString("Speciality"));
                 doctor.setEmail(result.getString("Email"));
                 doctor.setTimetable(result.getString("TimeTable"));
@@ -61,8 +61,8 @@ public class DoctorDAO {
             statement = dbconnection.createStatement();
             sql = "INSERT INTO Doctor(DniDoctor, Name, Surname, Speciality, Email, Timetable, ExtraHour, Phone)" +
                     " VALUES ('" + doctor.getDni().replaceAll("'", "@") + "'," +
-                    "'" + doctor.getName().replaceAll("'", "@") + "'," +
-                    "'" + doctor.getSurname().replaceAll("'", "@") + "'," +
+                    "'" + doctor.getFirstName().replaceAll("'", "@") + "'," +
+                    "'" + doctor.getLastName().replaceAll("'", "@") + "'," +
                     "'" + doctor.getSpeciality().replaceAll("'", "@") + "'," +
                     "'" + doctor.getEmail().replaceAll("'", "@") + "'," +
                     "'" + doctor.getTimetable().replaceAll("'", "@") + "'," +
@@ -124,13 +124,13 @@ public class DoctorDAO {
         try {
             dbconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconnection.createStatement();
-            sql = "SELECT Name, Surname, Speciality FROM Doctor ORDER BY Speciality;";
+            sql = "SELECT FirstName, LastName, Speciality FROM Doctor ORDER BY Speciality;";
             result = statement.executeQuery(sql);
 
             while (result.next()) {
                 Doctor doctor = new Doctor();
-                doctor.setName(result.getString("Name"));
-                doctor.setSurname(result.getString("Surname"));
+                doctor.setFirstName(result.getString("FirstName"));
+                doctor.setLastName(result.getString("LastName"));
                 doctor.setSpeciality(result.getString("Speciality"));
                 doctors.add(doctor);
             }
@@ -156,13 +156,13 @@ public class DoctorDAO {
         try {
             dbconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconnection.createStatement();
-            sql = "SELECT Surname, Name, Speciality FROM Doctor ORDER BY Surname DESC";
+            sql = "SELECT LastName, FirstName, Speciality FROM Doctor ORDER BY Surname DESC";
             result = statement.executeQuery(sql);
 
             while (result.next()) {
                 Doctor doctor = new Doctor();
-                doctor.setSurname(result.getString("Surname"));
-                doctor.setName(result.getString("Name"));
+                doctor.setLastName(result.getString("LastName"));
+                doctor.setFirstName(result.getString("FirstName"));
                 doctor.setSpeciality(result.getString("Speciality"));
                 doctors.add(doctor);
             }

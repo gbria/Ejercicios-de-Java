@@ -7,8 +7,8 @@ public class Nurse extends Person {
         this.timeTable = "";
     }
 
-    public Nurse(String dni, String name, String surname, String email, int phone, String timeTable) {
-        super(dni, name, surname, email, phone);
+    public Nurse(String dni, String firstName, String lastName, String email, int phone, String timeTable) {
+        super(dni, firstName, lastName, email, phone);
         this.timeTable = timeTable;
     }
 

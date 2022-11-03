@@ -10,7 +10,7 @@ public class Main {
         Doctor doctor = new Doctor();
         ArrayList<Doctor> doctors = new ArrayList<>();
 
-        doctors = DoctorDAO.getHospitalMetges();
+        doctors = DoctorDAO.getHospitalDoctors();
         System.out.println(doctors);
     }
 }

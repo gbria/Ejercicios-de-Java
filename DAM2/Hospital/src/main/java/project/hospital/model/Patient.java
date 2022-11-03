@@ -23,8 +23,8 @@ public class Patient extends Person{
         this.surgicalOp = "";
     }
 
-    public Patient(String dni, String name, String surname, String email, int phone, Date dateBirth, String gender, String bloodType, String allergy, String medicalIllness, String medicalTest, String prescription, String surgicalOp) {
-        super(dni, name, surname, email, phone);
+    public Patient(String dni, String firstName, String lastName, String email, int phone, Date dateBirth, String gender, String bloodType, String allergy, String medicalIllness, String medicalTest, String prescription, String surgicalOp) {
+        super(dni, firstName, lastName, email, phone);
         this.dateBirth = dateBirth;
         this.gender = gender;
         this.bloodType = bloodType;

@@ -26,8 +26,8 @@ public class NurseDAO {
             while (result.next()) {
                 Nurse nurse = new Nurse();
                 nurse.setDni(result.getString("DniNurse"));
-                nurse.setName(result.getString("Name"));
-                nurse.setSurname(result.getString("Surname"));
+                nurse.setFirstName(result.getString("FirstName"));
+                nurse.setLastName(result.getString("LastName"));
                 nurse.setEmail(result.getString("Email"));
                 nurse.setTimeTable(result.getString("TimeTable"));
                 nurse.setPhone(result.getInt("Phone"));
@@ -58,10 +58,10 @@ public class NurseDAO {
         try {
             dbconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconnection.createStatement();
-            sql = "INSERT INTO Nurse(DniNurse, Name, Surname, Email, TimeTable, Phone)" +
+            sql = "INSERT INTO Nurse(DniNurse, FirstName, LastName, Email, TimeTable, Phone)" +
                     " VALUES ('" + nurse.getDni().replaceAll("'", "@") + "'," +
-                    "'" + nurse.getName().replaceAll("'", "@") + "'," +
-                    "'" + nurse.getSurname().replaceAll("'", "@") + "'," +
+                    "'" + nurse.getFirstName().replaceAll("'", "@") + "'," +
+                    "'" + nurse.getLastName().replaceAll("'", "@") + "'," +
                     "'" + nurse.getEmail().replaceAll("'", "@") + "'," +
                     "'" + nurse.getTimeTable().replaceAll("'", "@") + "'," +
                     "'" + nurse.getPhone() + ");";

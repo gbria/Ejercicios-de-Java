@@ -1,5 +1,7 @@
 package project.hospital.model;
 
+import org.checkerframework.checker.units.qual.A;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -12,7 +14,7 @@ public class PatientDAO {
     private static final String DB_PASSWD = "X1ljbK7jBcrct6TtLDWiQPmmTg14LjO9";
 
 
-    //Consulta datos pacientes
+    //Appointment datos pacientes
     public static ArrayList<Patient> getHospitalPatients() {
         ArrayList<Patient> patients = new ArrayList<>();
         Connection dbconnection = null;
@@ -29,8 +31,8 @@ public class PatientDAO {
             while (result.next()) {
                 Patient patient = new Patient();
                 patient.setDni(result.getString("DniPatient"));
-                patient.setName(result.getString("Name"));
-                patient.setSurname(result.getString("Surname"));
+                patient.setFirstName(result.getString("FirstName"));
+                patient.setLastName(result.getString("LastName"));
                 patient.setDateBirth(result.getDate("DateBirth"));
                 patient.setGender(result.getString("Gender"));
                 patient.setBloodType(result.getString("BloodType"));
@@ -67,10 +69,10 @@ public class PatientDAO {
         try {
             dbconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconnection.createStatement();
-            sql = "INSERT INTO Patient (DniPatient, Name, Surname, DateBirth, Gender, BloodType, Phone, Email, Allergy, MedicalIllness, MedicalTest, Prescription)" +
+            sql = "INSERT INTO Patient (DniPatient, FirstName, LastName, DateBirth, Gender, BloodType, Phone, Email, Allergy, MedicalIllness, MedicalTest, Prescription)" +
                     " VALUES ('" + patient.getDni().replaceAll("'", "@") + "'," +
-                    "'" + patient.getName().replaceAll("'", "@") + "'," +
-                    "'" + patient.getSurname().replaceAll("'", "@") + "'," +
+                    "'" + patient.getFirstName().replaceAll("'", "@") + "'," +
+                    "'" + patient.getLastName().replaceAll("'", "@") + "'," +
                     "'" + patient.getDateBirth() + "'," +
                     "'" + patient.getGender().replaceAll("'", "@") + "'," +
                     "'" + patient.getBloodType().replaceAll("'", "@") + "'," +
@@ -134,15 +136,14 @@ public class PatientDAO {
         try {
             dbconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconnection.createStatement();
-            //REVISAR ESTA CONSULTA PARA PONER UPPERCASE
             sql = "SELECT * FROM Patient WHERE SurgicalOp like UPPER('si')";
             result = statement.executeQuery(sql);
 
             while (result.next()) {
                 Patient patient = new Patient();
                 patient.setDni(result.getString("DniPatient"));
-                patient.setName(result.getString("Name"));
-                patient.setSurname(result.getString("Surname"));
+                patient.setFirstName(result.getString("FirstName"));
+                patient.setLastName(result.getString("LastName"));
                 patient.setDateBirth(result.getDate("DateBirth"));
                 patient.setGender(result.getString("Gender"));
                 patient.setBloodType(result.getString("BloodType"));
@@ -154,6 +155,44 @@ public class PatientDAO {
                 patient.setPrescription(result.getString("Prescription"));
                 patient.setSurgicalOp(result.getString("SurgicalOp"));
 
+                patients.add(patient);
+            }
+
+            result.close();
+            statement.close();
+            dbconnection.close();
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return patients;
+    }
+
+
+    public static ArrayList<Patient> getHospitalHistorialByPacientOfTimeEspecificP2(String dniPatient, String date) {
+
+        /**Q5. Veure l'historial dels pacients en un moment determinar*/
+
+        ArrayList<Patient> patients = new ArrayList<>();
+        Connection dbconnection = null;
+        Statement statement = null;
+        ResultSet result = null;
+        String sql;
+
+        try {
+            dbconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
+            statement = dbconnection.createStatement();
+            sql = "SELECT P.MedicalIllness, P.MedicalTest, P.Prescription" +
+                    "FROM Appointment A INNER JOIN Patient P ON A.DniPacient=P.DniPacient" +
+                    "WHERE UPPER(P.DniPatient) = UPPER('" + dniPatient + "') AND C.data = '" + date + "'";
+
+            result = statement.executeQuery(sql);
+
+            while (result.next()) {
+                Patient patient = new Patient();
+                patient.setMedicalIllness(result.getString("MedicalIllness"));
+                patient.setMedicalTest(result.getString("MedicalTest"));
+                patient.setPrescription(result.getString("Prescription"));
                 patients.add(patient);
             }
 

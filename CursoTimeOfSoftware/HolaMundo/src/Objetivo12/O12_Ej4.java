@@ -2,33 +2,29 @@ package Objetivo12;
 
 import java.io.*;
 
-public class O12_Ej3 {
+public class O12_Ej4 {
     public static void main(String[] args) {
         String ruta = "nuevo.txt";
         String linea = null;
+        //Creamos el fichero en la ruta
         File fichero = new File(ruta);
-        if (fichero.exists()) {
-            System.out.println("ERROR: el fichero " + ruta + " ya existe");
+        if (!fichero.exists()) {
+            System.out.println("ERROR: El fichero " + ruta + "no existe");
         } else {
             try {
-                BufferedWriter writer = new BufferedWriter(new FileWriter(ruta));
-                //Bucle que escribe el número de la fila de 0 a 9
-                for (int i = 0; i < 10; i++) {
-                    writer.write("Fila números " + i + "\n");
+                BufferedWriter writer = new BufferedWriter(new FileWriter(ruta, true));
+                for (int i = 10; i < 13; i++) {
+                    writer.write("Fila número" + i + "\n");
                 }
-                //Cierra el fichero
                 writer.close();
-                //Chivato
-                System.out.println("Fichero creado y escritura completada");
+                System.out.println("INFO: Fichero actualizado");
 
-                //Inicio de la lectura del fichero
+                //Inicio de la lectura del fichero actualizado
                 System.out.println("-- Lectura del fichero --");
                 BufferedReader reader = null;
                 reader = new BufferedReader(new FileReader(ruta));
-                //Lee la primera fila
                 linea = reader.readLine();
-                //Bucle que lee todas las líneas
-                while (linea!=null){
+                while (linea != null) {
                     System.out.println(linea);
                     linea = reader.readLine();
                 }

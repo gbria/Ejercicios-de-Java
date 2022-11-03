@@ -2,23 +2,23 @@ package project.hospital.model;
 
 public class Person {
     private String dni;
-    private String name;
-    private String surname;
+    private String firstName;
+    private String lastName;
     private String email;
     private int phone;
 
     public Person() {
         this.dni = "";
-        this.name = "";
-        this.surname = "";
+        this.firstName = "";
+        this.lastName = "";
         this.email = "";
         this.phone = 0;
     }
 
-    public Person(String dni, String name, String surname, String email, int phone) {
+    public Person(String dni, String firstName, String lastName, String email, int phone) {
         this.dni = dni;
-        this.name = name;
-        this.surname = surname;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.phone = phone;
     }
@@ -31,20 +31,20 @@ public class Person {
         this.dni = dni;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -65,12 +65,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Persona: " +
-                "Dni: " + dni + '\'' +
-                ", Nom: " + name + '\'' +
-                ", Cognoms: " + surname + '\'' +
-                ", Email: " + email + '\'' +
-                ", Telefon: " + phone +
-                '}';
+        return "Persona: " + "Dni: " + dni + '\'' + ", Nom: " + firstName + '\'' + ", Cognoms: " + lastName + '\'' + ", Email: " + email + '\'' + ", Telefon: " + phone + '}';
     }
 }
