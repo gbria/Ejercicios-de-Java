@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 public class PatientDAO {
 
-    private static final String DB_URL = "jdbc:postgresql://surus.db.elephantsql.com/kgoicfvc";
+    private static final String DB_URL = "jdbc:postgresql://surus.db.elephantsql.com/rslhocxz";
 
-    private static final String DB_USER = "kgoicfvc";
+    private static final String DB_USER = "rslhocxz";
 
-    private static final String DB_PASSWD = "X1ljbK7jBcrct6TtLDWiQPmmTg14LjO9";
+    private static final String DB_PASSWD = "zS5Ly1wi24pbfowS0XlbXnQbj744rn9N";
 
 
     //Appointment datos pacientes

@@ -168,13 +168,14 @@ public class Controller {
 
         }
 
-        //Creamos dos Arrays más para ir guardando todos los datos de las diferentes arrays SPLIT(separados por el punto y coma)
-
+        //Creamos dos Arrays
         String p1[], p2[];
 
+        //Guardamos los datos de las diferentes arrays SPLIT(separados por el punto y coma)
         p1 = infoPatient.split(";");
         p2 = infoAppointment.split(";");
 
+        //Creamos dos variables auxiliares para recorrer los arrays y almacenar la información
         ArrayList<String> totalString = new ArrayList<>();
         String text;
 
