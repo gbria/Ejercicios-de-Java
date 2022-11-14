@@ -65,6 +65,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Persona: " + "Dni: " + dni + '\'' + ", Nom: " + firstName + '\'' + ", Cognoms: " + lastName + '\'' + ", Email: " + email + '\'' + ", Telefon: " + phone + '}';
+        return  "Dni: " + dni  + ", Nom: " + firstName + ", Cognoms: " + lastName + ", Email: " + email + ", Telefon: " + phone + '\n';
     }
 }

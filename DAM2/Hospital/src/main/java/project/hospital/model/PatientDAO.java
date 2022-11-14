@@ -169,7 +169,7 @@ public class PatientDAO {
     }
 
 
-    public static ArrayList<Patient> getHospitalHistorialByPacientOfTimeEspecificP2(String dniPatient, String date) {
+    public static ArrayList<Patient> getHospitalHistorialByPacientOfTimeEspecificP2(String date) {
 
         /**Q5. Veure l'historial dels pacients en un moment determinar*/
 
@@ -184,7 +184,7 @@ public class PatientDAO {
             statement = dbconnection.createStatement();
             sql = "SELECT P.MedicalIllness, P.MedicalTest, P.Prescription" +
                     "FROM Appointment A INNER JOIN Patient P ON A.DniPacient=P.DniPacient" +
-                    "WHERE UPPER(P.DniPatient) = UPPER('" + dniPatient + "') AND C.data = '" + date + "'";
+                    "WHERE C.data = '" + date + "'";
 
             result = statement.executeQuery(sql);
 

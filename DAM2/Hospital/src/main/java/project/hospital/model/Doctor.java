@@ -46,8 +46,6 @@ public class Doctor extends Person {
     @Override
     public String toString() {
         return super.toString() +
-                "Jornada: " + timetable + "\n" +
-                "Especialitat: " + speciality + "\n" +
-                "Hores Extres: " + extraHour;
+                "Jornada: " + timetable + ", Especialitat: " + speciality + ", Hores Extres: " + extraHour + "\n";
     }
 }

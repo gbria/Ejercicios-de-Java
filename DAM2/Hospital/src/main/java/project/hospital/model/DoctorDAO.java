@@ -90,7 +90,7 @@ public class DoctorDAO {
 
 
     //Eliminar un doctor/a
-    public static boolean deletePerson(String dniDoctor) {
+    public static boolean deleteDoctor(String dniDoctor) {
         Connection dbconection = null;
         Statement statement = null;
         String sql;

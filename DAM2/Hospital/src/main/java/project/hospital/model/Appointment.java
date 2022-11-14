@@ -1,23 +1,29 @@
 package project.hospital.model;
 
 public class Appointment extends Person{
+    private int id;
     private String date;
-    private int time;
-    private Patient patient;
+    private String time;
     private int docOffice;
 
     public Appointment() {
         this.date = "";
-        this.time = 0;
-        this.patient = new Patient();
+        this.time = "";
         this.docOffice = 0;
     }
 
-    public Appointment(String date, int time, Patient patient, int docOffice) {
+    public Appointment(String date, String time, int docOffice) {
         this.date = date;
         this.time = time;
-        this.patient = patient;
         this.docOffice = docOffice;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDate() {
@@ -28,11 +34,11 @@ public class Appointment extends Person{
         this.date = date;
     }
 
-    public int getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
