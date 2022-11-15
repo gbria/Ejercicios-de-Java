@@ -43,10 +43,18 @@ public class Ex4 {
                     //Calcular la serie numérica [ 1-X ^2/2!+ X ^4/4! -...]
                     System.out.print("Introdueixi el número: ");
                     num = sc.nextInt();
+
+                    //Llamamos a la función para calcular la serie númerica
+                    System.out.println("La serie númerica es " + serieNumerica(num));
             }
 
         }
 
+    }
+
+    private static String serieNumerica(int num) {
+        //[1-X ^2/2!+ X ^4/4! -...]
+        return null;
     }
 
     private static boolean comprobarNegativo(int num) {
