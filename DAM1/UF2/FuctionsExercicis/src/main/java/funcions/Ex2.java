@@ -8,11 +8,11 @@ public class Ex2 {
         Scanner sc = new Scanner(System.in);
         //Introducción de los datos
         System.out.print("Introdueixi el primer catet: ");
-        int a = sc.nextInt();
+        float a = sc.nextFloat();
         System.out.print("Introdueixi el segon catet: ");
-        int b = sc.nextInt();
+        float b = sc.nextFloat();
         System.out.print("Introdueixi hipotenusa: ");
-        int h = sc.nextInt();
+        float h = sc.nextFloat();
 
         //Llamada de la función que devuelve un boolean
         if (checkPitagoras(a, b, h)) {
@@ -22,8 +22,8 @@ public class Ex2 {
         }
 
     }
-    private static boolean checkPitagoras(int a, int b, int h) {
-        //Función que comprueba si los 3 valores son correctos en el teorema de Pitágoras
+    private static boolean checkPitagoras(float a, float b, float h) {
+        //Función que comprueba si los 3 valores son correctos según el teorema de Pitágoras
         if (Math.pow(a, 2) + Math.pow(b, 2) == (Math.pow(h, 2))) return true;
         return false;
     }
