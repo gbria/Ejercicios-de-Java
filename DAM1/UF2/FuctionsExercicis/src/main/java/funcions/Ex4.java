@@ -6,7 +6,7 @@ public class Ex4 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         boolean exit = false;
-        int option, num;
+        int option, fact, x;
 
         //Contenido del menú
         while (exit == false) {
@@ -28,28 +28,47 @@ public class Ex4 {
                 case 1:
                     //Petición del número
                     System.out.print("Introdueixi el número: ");
-                    num = sc.nextInt();
+                    fact = sc.nextInt();
 
                     //Comprobación del negativo mediante método
-                    if (comprobarNegativo(num)) {
+                    if (comprobarNegativo(fact)) {
                         System.out.println("El número es negatiu");
                     } else {
                         //En caso de número positivo, calculamos su factorial mediante función
-                        System.out.println("El número factorial es el " + calcularFactorial(num));
+                        System.out.println("El número factorial es el " + calcularFactorial(fact));
                     }
                     break;
 
                 case 2:
                     //Calcular la serie numérica [ 1-X ^2/2!+ X ^4/4! -...]
-                    System.out.print("Introdueixi el número: ");
-                    num = sc.nextInt();
+                    System.out.print("Introdueixi el número X: ");
+                    x = sc.nextInt();
 
-                    //Llamamos a la función para calcular la serie númerica
-                    System.out.println("La serie númerica es " + serieNumerica(num));
+                    System.out.print("Introdueixi quantitat N: ");
+                    int n = sc.nextInt();
+
+                    calcularSerieFactorial(x, n);
             }
 
         }
 
+    }
+
+    private static String calcularSerieFactorial(int x, int n) {
+        int resultado = 1;
+        try {
+            for (int i = 1, j = 2; i <= n - 1; i++, j += 2) {
+                if (i % 2 == 0) {
+                    resultado += +((int) Math.pow(x, j) / calcularFactorial(j));
+                } else {
+                    resultado += -((int) Math.pow(x, j) / calcularFactorial(j));
+                }
+            }
+        } catch (ArithmeticException e) {
+            System.out.println("ERROR: El número no pudo dividirse entre 0. \n" + e);
+        } finally {
+            return "El resultado es " + resultado;
+        }
     }
 
     private static String serieNumerica(int num) {

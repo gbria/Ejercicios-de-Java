@@ -39,6 +39,7 @@ public class CaesarCipher {
                         clau = sc.nextInt();
                         if (!(clau > 0 && clau <= 25)) {
                             System.out.println("Error. Clau fora del rang de valors");
+
                         }
                     } while (!(clau > 0 && clau <= 25));
 
@@ -56,6 +57,15 @@ public class CaesarCipher {
                     System.out.print("Cadena de text xifrada: ");
                     for (int i = 0; i < str1.length(); i++) {
                         catNum = str1.charAt(i) + clau;
+                        //Condición por si se pasa del las mayúsculas en código ascii, ya que llegan del (64 - 90)
+                        if (catNum > 90) {
+                            //catNum = catNum - 90 + 64; Alternativa
+                            //catNum = 64 + (catNum - 90); Alternativa
+
+                            //Resta el número ASCII con el número de letras mayúsculas
+                            //(90 = 90 - 26) CON CLAVE 2 ('Z' = 'Z' - 'B')
+                            catNum -= 26;
+                        }
                         //System.out.print(catNum);
                         System.out.print(catChar = (char) catNum);
                     }
@@ -86,6 +96,10 @@ public class CaesarCipher {
                     System.out.print("Cadena de text desxifrada: ");
                     for (int i = 0; i < str1.length(); i++) {
                         catNum = str1.charAt(i) - clau;
+                        if (catNum < 65) {
+                            catNum += 26;
+                        }
+
                         //System.out.print(catNum);
                         System.out.print(catChar = (char) catNum);
                     }
@@ -95,8 +109,8 @@ public class CaesarCipher {
                 default:
                     System.out.println("\nError. Opció incorrecta\n");
                     break;
-            }
 
+            }
         } while (opcio != 0);
     }
 }

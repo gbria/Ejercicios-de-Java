@@ -2,44 +2,31 @@ package ProyectoFinal;
 
 public class Telefono extends Persona{
     //Atributos Telefono
-    private int TelefonoFijo;
-    private int TelefonoMovil;
-    private int TelefonoTrabajo;
+    private String TelefonoFijo;
+    private String TelefonoMovil;
+    private String TelefonoTrabajo;
 
-    public Telefono(String nombre, String apellidos, String fechaNacimiento) {
-        super(nombre, apellidos, fechaNacimiento);
-    }
-
-    //Método que devuelve la información del TelefonoFijo
-    public int GetTelefonoFijo() {
+    public String getTelefonoFijo() {
         return TelefonoFijo;
     }
 
-    //Método que devuelve la información del TelefonoMovil
-    public int GetTelefonoMovil() {
-        return TelefonoMovil;
-    }
-
-    //Método que devuelve la información del TelefonoTrabajo
-    public int GetTelefonoTrabajo() {
-        return TelefonoTrabajo;
-    }
-
-    //Método que modifica el valor del atributo TelefonoFijo
-    public void SetTelefonoFijo(int telefonoFijo) {
+    public void setTelefonoFijo(String telefonoFijo) {
         TelefonoFijo = telefonoFijo;
     }
 
-    //Método que modifica el valor del atributo TelefonoMovil
-    public void SetTelefonoMovil(int telefonoMovil){
+    public String getTelefonoMovil() {
+        return TelefonoMovil;
+    }
+
+    public void setTelefonoMovil(String telefonoMovil) {
         TelefonoMovil = telefonoMovil;
     }
 
-    //Metodo que modifica el valor del atributo TelefonoTrabajo
-    public void SetTelefonoTrabajo(int telefonoTrabajo){
-        TelefonoTrabajo = telefonoTrabajo;
+    public String getTelefonoTrabajo() {
+        return TelefonoTrabajo;
     }
 
-
-
+    public void setTelefonoTrabajo(String telefonoTrabajo) {
+        TelefonoTrabajo = telefonoTrabajo;
+    }
 }
