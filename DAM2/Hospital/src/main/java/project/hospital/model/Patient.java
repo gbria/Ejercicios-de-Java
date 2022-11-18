@@ -1,9 +1,10 @@
 package project.hospital.model;
 
 import java.util.Date;
+import java.util.Scanner;
 
 public class Patient extends Person{
-    private Date dateBirth;
+    private String dateBirth;
     private String gender;
     private String bloodType;
     private String allergy;
@@ -23,7 +24,7 @@ public class Patient extends Person{
         this.surgicalOp = "";
     }
 
-    public Patient(String dni, String firstName, String lastName, String email, int phone, Date dateBirth, String gender, String bloodType, String allergy, String medicalIllness, String medicalTest, String prescription, String surgicalOp) {
+    public Patient(String dni, String firstName, String lastName, String email, int phone, String dateBirth, String gender, String bloodType, String allergy, String medicalIllness, String medicalTest, String prescription, String surgicalOp) {
         super(dni, firstName, lastName, email, phone);
         this.dateBirth = dateBirth;
         this.gender = gender;
@@ -35,11 +36,12 @@ public class Patient extends Person{
         this.surgicalOp = surgicalOp;
     }
 
-    public Date getDateBirth() {
+
+    public String getDateBirth() {
         return dateBirth;
     }
 
-    public void setDateBirth(Date dateBirth) {
+    public void setDateBirth(String dateBirth) {
         this.dateBirth = dateBirth;
     }
 

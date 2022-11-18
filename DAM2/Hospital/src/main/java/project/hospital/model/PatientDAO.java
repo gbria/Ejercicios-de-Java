@@ -33,7 +33,7 @@ public class PatientDAO {
                 patient.setDni(result.getString("DniPatient"));
                 patient.setFirstName(result.getString("FirstName"));
                 patient.setLastName(result.getString("LastName"));
-                patient.setDateBirth(result.getDate("DateBirth"));
+                patient.setDateBirth(result.getString("DateBirth"));
                 patient.setGender(result.getString("Gender"));
                 patient.setBloodType(result.getString("BloodType"));
                 patient.setPhone(result.getInt("Phone"));
@@ -69,7 +69,7 @@ public class PatientDAO {
         try {
             dbconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconnection.createStatement();
-            sql = "INSERT INTO Patient (DniPatient, FirstName, LastName, DateBirth, Gender, BloodType, Phone, Email, Allergy, MedicalIllness, MedicalTest, Prescription)" +
+            sql = "INSERT INTO Patient (DniPatient, FirstName, LastName, DateBirth, Gender, BloodType, Phone, Email, Allergy, MedicalIllness, MedicalTest, Prescription, SurgicalOp)" +
                     " VALUES ('" + patient.getDni().replaceAll("'", "@") + "'," +
                     "'" + patient.getFirstName().replaceAll("'", "@") + "'," +
                     "'" + patient.getLastName().replaceAll("'", "@") + "'," +
@@ -81,7 +81,9 @@ public class PatientDAO {
                     "'" + patient.getAllergy().replaceAll("'", "@") + "'," +
                     "'" + patient.getMedicalIllness().replaceAll("'", "@") + "'," +
                     "'" + patient.getMedicalTest().replaceAll("'", "@") + "'," +
-                    "'" + patient.getPrescription().replaceAll("'", "@") + "'," + ");";
+                    "'" + patient.getPrescription().replaceAll("'", "@") + "'," +
+                    "'" + patient.getSurgicalOp().replaceAll("'", "@") + "'" + ");";
+
             System.out.println(sql);
 
             nrows = statement.executeUpdate(sql);
@@ -110,7 +112,7 @@ public class PatientDAO {
         try {
             dbconection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconection.createStatement();
-            sql = "delete from Pacient where nifpacient=" + dniPatient + ";";
+            sql = "DELETE FROM Patient WHERE dnipatient='" + dniPatient + "';";
             nrows = statement.executeUpdate(sql);
             statement.close();
             dbconection.close();
@@ -136,7 +138,9 @@ public class PatientDAO {
         try {
             dbconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconnection.createStatement();
-            sql = "SELECT * FROM Patient WHERE SurgicalOp like UPPER('si')";
+            sql = "SELECT dnipatient, firstname, lastname, medicalillness, surgicalop " +
+                    "FROM Patient " +
+                    "WHERE upper(SurgicalOp) like UPPER('si')";
             result = statement.executeQuery(sql);
 
             while (result.next()) {
@@ -144,15 +148,7 @@ public class PatientDAO {
                 patient.setDni(result.getString("DniPatient"));
                 patient.setFirstName(result.getString("FirstName"));
                 patient.setLastName(result.getString("LastName"));
-                patient.setDateBirth(result.getDate("DateBirth"));
-                patient.setGender(result.getString("Gender"));
-                patient.setBloodType(result.getString("BloodType"));
-                patient.setPhone(result.getInt("Phone"));
-                patient.setEmail(result.getString("Email"));
-                patient.setAllergy(result.getString("Allergy"));
                 patient.setMedicalIllness(result.getString("MedicalIllness"));
-                patient.setMedicalTest(result.getString("MedicalTest"));
-                patient.setPrescription(result.getString("Prescription"));
                 patient.setSurgicalOp(result.getString("SurgicalOp"));
 
                 patients.add(patient);
@@ -167,44 +163,5 @@ public class PatientDAO {
 
         return patients;
     }
-
-
-    public static ArrayList<Patient> getHospitalHistorialByPacientOfTimeEspecificP2(String date) {
-
-        /**Q5. Veure l'historial dels pacients en un moment determinar*/
-
-        ArrayList<Patient> patients = new ArrayList<>();
-        Connection dbconnection = null;
-        Statement statement = null;
-        ResultSet result = null;
-        String sql;
-
-        try {
-            dbconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
-            statement = dbconnection.createStatement();
-            sql = "SELECT P.MedicalIllness, P.MedicalTest, P.Prescription" +
-                    "FROM Appointment A INNER JOIN Patient P ON A.DniPacient=P.DniPacient" +
-                    "WHERE C.data = '" + date + "'";
-
-            result = statement.executeQuery(sql);
-
-            while (result.next()) {
-                Patient patient = new Patient();
-                patient.setMedicalIllness(result.getString("MedicalIllness"));
-                patient.setMedicalTest(result.getString("MedicalTest"));
-                patient.setPrescription(result.getString("Prescription"));
-                patients.add(patient);
-            }
-
-            result.close();
-            statement.close();
-            dbconnection.close();
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-
-        return patients;
-    }
-
 
 }

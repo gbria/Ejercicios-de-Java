@@ -22,7 +22,6 @@ public class Nurse extends Person {
 
     @Override
     public String toString() {
-        return super.toString() +
-                "Horari: " + timeTable;
+        return "torn: " + timeTable;
     }
 }

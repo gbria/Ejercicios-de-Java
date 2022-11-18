@@ -59,7 +59,7 @@ public class DoctorDAO {
         try {
             dbconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconnection.createStatement();
-            sql = "INSERT INTO Doctor(DniDoctor, Name, Surname, Speciality, Email, Timetable, ExtraHour, Phone)" +
+            sql = "INSERT INTO Doctor (DniDoctor, FirstName, LastName, Speciality, Email, Timetable, ExtraHour, Phone)" +
                     " VALUES ('" + doctor.getDni().replaceAll("'", "@") + "'," +
                     "'" + doctor.getFirstName().replaceAll("'", "@") + "'," +
                     "'" + doctor.getLastName().replaceAll("'", "@") + "'," +
@@ -67,7 +67,7 @@ public class DoctorDAO {
                     "'" + doctor.getEmail().replaceAll("'", "@") + "'," +
                     "'" + doctor.getTimetable().replaceAll("'", "@") + "'," +
                     "'" + doctor.getExtraHour() + "'," +
-                    "'" + doctor.getPhone() + ");";
+                    doctor.getPhone() + ");";
 
             System.out.println(sql);
 
@@ -98,7 +98,7 @@ public class DoctorDAO {
         try {
             dbconection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconection.createStatement();
-            sql = "DELETE FROM Doctor WHERE DniDoctor=" + dniDoctor + ";";
+            sql = "DELETE FROM Doctor WHERE DniDoctor='" + dniDoctor + "';";
             nrows = statement.executeUpdate(sql);
             statement.close();
             dbconection.close();
@@ -113,8 +113,10 @@ public class DoctorDAO {
     }
 
 
-    //Consultar los/las doctores/as según su especialidad
-    public static ArrayList<Doctor> getMedicalSpeciality() {
+    /**
+     * Q9. De les especialitats que tenen els metges de l'hospital que estan treballant, ordenants alfabèticament
+     */
+    public static ArrayList<Doctor> getDoctorsBySpeciality() {
         ArrayList<Doctor> doctors = new ArrayList<>();
         Connection dbconnection = null;
         Statement statement = null;
@@ -124,13 +126,13 @@ public class DoctorDAO {
         try {
             dbconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconnection.createStatement();
-            sql = "SELECT FirstName, LastName, Speciality FROM Doctor ORDER BY Speciality;";
+            sql = "SELECT FirstName, LastName, Speciality FROM Doctor ORDER BY lastname;";
             result = statement.executeQuery(sql);
 
             while (result.next()) {
                 Doctor doctor = new Doctor();
-                doctor.setFirstName(result.getString("FirstName"));
                 doctor.setLastName(result.getString("LastName"));
+                doctor.setFirstName(result.getString("FirstName"));
                 doctor.setSpeciality(result.getString("Speciality"));
                 doctors.add(doctor);
             }
@@ -144,9 +146,10 @@ public class DoctorDAO {
         return doctors;
     }
 
-    //Mostrar un listado de las diferentes especialidades médicas en el hospital ordenadas por los
-    //apellidos de los/las doctores/as
-    public static ArrayList<Doctor> getSpeciality() {
+/**
+ *  Q10. Llista amb els metges que hi ha en cada especialitat
+ * */
+    public static ArrayList<Doctor> getListBySpeciality() {
         ArrayList<Doctor> doctors = new ArrayList<>();
         Connection dbconnection = null;
         Statement statement = null;
@@ -156,14 +159,16 @@ public class DoctorDAO {
         try {
             dbconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconnection.createStatement();
-            sql = "SELECT LastName, FirstName, Speciality FROM Doctor ORDER BY Surname DESC";
+            sql = "SELECT Speciality, LastName, FirstName " +
+                    "FROM Doctor " +
+                    "ORDER BY speciality DESC";
             result = statement.executeQuery(sql);
 
             while (result.next()) {
                 Doctor doctor = new Doctor();
+                doctor.setSpeciality(result.getString("Speciality"));
                 doctor.setLastName(result.getString("LastName"));
                 doctor.setFirstName(result.getString("FirstName"));
-                doctor.setSpeciality(result.getString("Speciality"));
                 doctors.add(doctor);
             }
 

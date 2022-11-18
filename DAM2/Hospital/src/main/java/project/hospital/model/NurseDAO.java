@@ -58,13 +58,13 @@ public class NurseDAO {
         try {
             dbconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconnection.createStatement();
-            sql = "INSERT INTO Nurse(DniNurse, FirstName, LastName, Email, TimeTable, Phone)" +
+            sql = "INSERT INTO Nurse (DniNurse, FirstName, LastName, Email, TimeTable, Phone)" +
                     " VALUES ('" + nurse.getDni().replaceAll("'", "@") + "'," +
                     "'" + nurse.getFirstName().replaceAll("'", "@") + "'," +
                     "'" + nurse.getLastName().replaceAll("'", "@") + "'," +
                     "'" + nurse.getEmail().replaceAll("'", "@") + "'," +
                     "'" + nurse.getTimeTable().replaceAll("'", "@") + "'," +
-                    "'" + nurse.getPhone() + ");";
+                    nurse.getPhone() + ");";
 
             System.out.println(sql);
 
@@ -93,7 +93,7 @@ public class NurseDAO {
         try {
             dbconection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconection.createStatement();
-            sql = "DELETE FROM Nurse WHERE DniNurse = " + dniNurse + ";";
+            sql = "DELETE FROM Nurse WHERE DniNurse = '" + dniNurse + "';";
             nrows = statement.executeUpdate(sql);
             statement.close();
             dbconection.close();
