@@ -1,0 +1,10 @@
+C:\Users\germa\Documents\Visual Studio 2015\Projects\Master\Memory\Memory\bin\Debug\Memory.exe
+C:\Users\germa\Documents\Visual Studio 2015\Projects\Master\Memory\Memory\bin\Debug\Memory.pdb
+C:\Users\germa\Documents\Visual Studio 2015\Projects\Master\Memory\Memory\bin\Debug\Memory.xml
+C:\Users\germa\Documents\Visual Studio 2015\Projects\Master\Memory\Memory\obj\Debug\Memory.vbprojResolveAssemblyReference.cache
+C:\Users\germa\Documents\Visual Studio 2015\Projects\Master\Memory\Memory\obj\Debug\Memory.Form1.resources
+C:\Users\germa\Documents\Visual Studio 2015\Projects\Master\Memory\Memory\obj\Debug\Memory.Resources.resources
+C:\Users\germa\Documents\Visual Studio 2015\Projects\Master\Memory\Memory\obj\Debug\Memory.vbproj.GenerateResource.Cache
+C:\Users\germa\Documents\Visual Studio 2015\Projects\Master\Memory\Memory\obj\Debug\Memory.exe
+C:\Users\germa\Documents\Visual Studio 2015\Projects\Master\Memory\Memory\obj\Debug\Memory.xml
+C:\Users\germa\Documents\Visual Studio 2015\Projects\Master\Memory\Memory\obj\Debug\Memory.pdb
