@@ -22,7 +22,7 @@ public class Main {
         /**Q1. Assignació de consultas de pacients a partir del cuadre mèdic d'aquesta especialitat*/
 
         appointments = Controller.getHospitalAppointmentBySpeciality("Intern");
-        //System.out.println(appointments.toString());
+        System.out.println(appointments.toString());
 
         /**Q2. Assignació d'horaris i poder treure diàriament una llista de les consultes a realitzar pels metges.*/
         appointments = Controller.getHospitalAppointmentByDoctor("47901072F", "2022-09-30");
