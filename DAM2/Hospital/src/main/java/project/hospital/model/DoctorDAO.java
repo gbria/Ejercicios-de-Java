@@ -17,6 +17,8 @@ public class DoctorDAO {
         ResultSet result = null;
         String sql;
 
+
+
         try {
             dbconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = dbconnection.createStatement();

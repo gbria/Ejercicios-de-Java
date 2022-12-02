@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class AppointmentDAO {
     private static final String DB_URL = "jdbc:postgresql://surus.db.elephantsql.com/rslhocxz";
-    private static final String DB_USER = "rslhocxz";
+   private static final String DB_USER = "rslhocxz";
     private static final String DB_PASSWD = "zS5Ly1wi24pbfowS0XlbXnQbj744rn9N";
 
     /**
