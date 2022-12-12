@@ -41,6 +41,39 @@ public class Appointment {
         this.doctor = doctor;
     }
 
+    public String getFirstNamePatient(){
+        return this.patient.getFirstName();
+    }
+
+    public String getLastNamePatient(){
+        return this.patient.getLastName();
+    }
+
+    public String getMedicalIllness(){
+        return this.patient.getMedicalIllness();
+    }
+
+    public String getMedicalTest(){
+        return this.patient.getMedicalTest();
+    }
+
+    public String getPrescription(){
+        return this.patient.getPrescription();
+    }
+
+    public String getDniPatient(){
+        return this.patient.getDni();
+    }
+
+    public String getDniDoctor(){
+        return this.doctor.getDni();
+    }
+
+    public String getDniNurse(){
+        return this.nurse.getDni();
+    }
+
+
     public Nurse getNurse() {
         return nurse;
     }
@@ -93,9 +126,9 @@ public class Appointment {
 
 
 
-   /* @Override
+    @Override
     public String toString() {
         return "id: " + id + ", data:" + date + ", hora: " + time + ", dni pacient: " + patient + ", dni doctor: "
                 + doctor + ", dni infermer:" + nurse + ", consulta: " + docOffice;
-    }*/
+    }
 }

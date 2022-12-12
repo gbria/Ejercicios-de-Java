@@ -110,14 +110,54 @@ public class AppointmentController implements Initializable {
                 }
         );
 
-        idPaciente.setCellValueFactory(new PropertyValueFactory<>("Patient"));
+        idPaciente.setCellValueFactory(new PropertyValueFactory<>("dniPatient"));
+        idPaciente.setCellFactory(TextFieldTableCell.forTableColumn());
+        idPaciente.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<Appointment, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<Appointment, String> t) {
+                        Appointment appointmentTmp = ((Appointment) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        );
+                        appointmentTmp.setPatient(t.getNewValue());
+                        //Llamamos al método update para actualizar
+                        AppointmentDAO.updateAppointment(appointmentTmp);
+                    }
+                }
+        );
 
 
-        idDoctor.setCellValueFactory(new PropertyValueFactory<>("Doctor"));
+        idDoctor.setCellValueFactory(new PropertyValueFactory<>("dniDoctor"));
+        idDoctor.setCellFactory(TextFieldTableCell.forTableColumn());
+        idDoctor.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<Appointment, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<Appointment, String> t) {
+                        Appointment appointmentTmp = ((Appointment) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        );
+                        appointmentTmp.setDoctor(t.getNewValue());
+                        //Llamamos al método update para actualizar
+                        AppointmentDAO.updateAppointment(appointmentTmp);
+                    }
+                }
+        );
 
-
-        idEnfermero.setCellValueFactory(new PropertyValueFactory<>("Nurse"));
-
+        idEnfermero.setCellValueFactory(new PropertyValueFactory<>("dniNurse"));
+        idEnfermero.setCellFactory(TextFieldTableCell.forTableColumn());
+        idEnfermero.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<Appointment, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<Appointment, String> t) {
+                        Appointment appointmentTmp = ((Appointment) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        );
+                        appointmentTmp.setNurse(t.getNewValue());
+                        //Llamamos al método update para actualizar
+                        AppointmentDAO.updateAppointment(appointmentTmp);
+                    }
+                }
+        );
 
         idConsulta.setCellValueFactory(new PropertyValueFactory<>("docOffice"));
         idConsulta.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));

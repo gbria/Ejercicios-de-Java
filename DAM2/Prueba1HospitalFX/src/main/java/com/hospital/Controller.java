@@ -62,6 +62,7 @@ public class Controller {
             root = FXMLLoader.load(getClass().getResource("AppointmentView.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
+            stage.setTitle("Datos de las consultas");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
@@ -75,6 +76,7 @@ public class Controller {
             root = FXMLLoader.load(getClass().getResource("ConsultaMedicoView.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
+            stage.setTitle("Consultas por médico");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
@@ -88,6 +90,7 @@ public class Controller {
             root = FXMLLoader.load(getClass().getResource("ConsultaPacienteView.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
+            stage.setTitle("Consultas por paciente");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
@@ -101,6 +104,7 @@ public class Controller {
             root = FXMLLoader.load(getClass().getResource("ConsultaOperarView.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
+            stage.setTitle("Consultas de intervenciones quirúrgicas");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
