@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospital.NurseController">
+   <top>
+          <Label alignment="CENTER" contentDisplay="CENTER" text="Tabla de personal de enfermería" BorderPane.alignment="CENTER">
+              <font>
+                  <Font name="System Bold" size="30.0" />
+              </font>
+         <BorderPane.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </BorderPane.margin>
+          </Label>
+   </top>
+   <bottom>
+          <Button mnemonicParsing="false" onAction="#switchToSceneMain" prefWidth="200.0" text="volver" BorderPane.alignment="CENTER">
+              <font>
+                  <Font name="System Bold" size="20.0" />
+              </font>
+         <BorderPane.margin>
+            <Insets bottom="20.0" />
+         </BorderPane.margin>
+          </Button>
+   </bottom>
+   <center>
+            <TableView fx:id="tableNurse" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+                <columns>
+                    <TableColumn fx:id="idDni" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Dni" />
+                    <TableColumn fx:id="idNombre" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="-1.0" text="Nombre" />
+                    <TableColumn fx:id="idApellido" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="-1.0" text="Apellidos" />
+                    <TableColumn fx:id="idEmail" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="-1.0" text="Email" />
+                    <TableColumn fx:id="idHorario" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="-1.0" text="Horario" />
+                    <TableColumn fx:id="idTelefono" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="-1.0" text="Teléfono" />
+                </columns>
+         <BorderPane.margin>
+            <Insets bottom="20.0" left="10.0" right="10.0" />
+         </BorderPane.margin>
+            </TableView>
+   </center>
+   <left>
+      <VBox spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+                <Label contentDisplay="CENTER" text="Registro de enfermería">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                </Label>
+            <Separator prefWidth="200.0" />
+                  <GridPane>
+                      <columnConstraints>
+                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="134.0" minWidth="10.0" prefWidth="66.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                      </columnConstraints>
+                      <rowConstraints>
+                          <RowConstraints maxHeight="-Infinity" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                          <RowConstraints maxHeight="-Infinity" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                          <RowConstraints maxHeight="-Infinity" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                          <RowConstraints maxHeight="-Infinity" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                          <RowConstraints maxHeight="-Infinity" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                          <RowConstraints maxHeight="-Infinity" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                      </rowConstraints>
+                      <children>
+                          <Label text="Dni" />
+                          <TextField fx:id="txtDni" GridPane.columnIndex="1" />
+                          <Label text="Nombre" GridPane.rowIndex="1" />
+                          <TextField fx:id="txtFName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                          <Label text="Apellidos" GridPane.rowIndex="2" />
+                          <Label text="Email" GridPane.rowIndex="3" />
+                          <TextField fx:id="txtLName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                          <Label text="Teléfono" GridPane.rowIndex="5" />
+                          <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                          <TextField fx:id="txtPhone" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                          <TextField fx:id="txtTime" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                          <Label text="Horario" GridPane.rowIndex="4" />
+                      </children>
+                  </GridPane>
+            <Separator prefWidth="200.0" />
+                    <Button fx:id="btnAdd" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addNurse" prefWidth="10.0" text="Añadir">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+                    <Button fx:id="btnDelete" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteNurse" text="Eliminar">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
+      </VBox>
+   </left>
+</BorderPane>

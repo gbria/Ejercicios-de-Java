@@ -1,7 +1,6 @@
-package project.hospital.model;
+package com.hospital;
 
-
-public class Patient extends Person{
+public class Patient extends Person {
     private String dateBirth;
     private String gender;
     private String bloodType;
@@ -101,14 +100,6 @@ public class Patient extends Person{
 
     @Override
     public String toString() {
-        return super.toString() +
-                "Data Naixement: " + dateBirth + "\n" +
-                "Sexe: " + gender + "\n" +
-                "Grup Sanguini: " + bloodType + "\n" +
-                "Alergia: " + allergy + "\n" +
-                "Malaltia: " + medicalIllness + "\n" +
-                "Prova Medica: " + medicalTest + "\n" +
-                "Prescripció: " + prescription + "\n" +
-                "Cirurgia: " + surgicalOp;
+        return super.toString();
     }
 }

@@ -1,4 +1,4 @@
-package project.hospital.model;
+package com.hospital;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class PatientDAO {
     private static final String DB_PASSWD = "zS5Ly1wi24pbfowS0XlbXnQbj744rn9N";
 
 
-    //Appointment datos pacientes
+    //Consultar datos de los pacientes
     public static ArrayList<Patient> getHospitalPatients() {
         ArrayList<Patient> patients = new ArrayList<>();
         Connection dbconnection = null;
@@ -100,6 +100,50 @@ public class PatientDAO {
         }
     }
 
+    //Modificar paciente
+    public static boolean updatePatient(Patient patient) {
+        boolean check = false;
+        Connection dbconnection = null;
+        Statement statement = null;
+        String sql;
+        int nrows = 0;
+
+        try {
+            dbconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
+            statement = dbconnection.createStatement();
+            sql = "UPDATE Patient SET" +
+                    " firstname = '" + patient.getFirstName().replaceAll("'", "@") + "'," +
+                    "lastname = '" + patient.getLastName().replaceAll("'", "@") + "'," +
+                    "dateBirth = '" + patient.getDateBirth().replaceAll("'", "@") + "'," +
+                    "gender = '" + patient.getGender().replaceAll("'", "@") + "'," +
+                    "bloodtype = '" + patient.getGender().replaceAll("'", "@") + "'," +
+                    "phone = " + patient.getPhone()  +
+                    "email = '" + patient.getEmail().replaceAll("'", "@") + "'," +
+                    "allergy = '" + patient.getAllergy().replaceAll("'", "@") + "'," +
+                    "medicalillness = '" + patient.getMedicalIllness().replaceAll("'", "@") + "'," +
+                    "medicaltest = '" + patient.getMedicalTest().replaceAll("'", "@") + "'," +
+                    "prescription = '" + patient.getPrescription().replaceAll("'", "@") + "'," +
+                    "surgicalop = '" + patient.getPrescription().replaceAll("'", "@") + "'," +
+                    " WHERE dniPatient = '" + patient.getDni().replaceAll("'","@") + "';";
+
+            System.out.println(sql);
+
+            nrows = statement.executeUpdate(sql);
+
+            statement.close();
+            dbconnection.close();
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        if (nrows == 1) {
+            check = true;
+            return check;
+        } else {
+            return check;
+        }
+
+    }
 
     //Eliminar paciente
     public static boolean deletePatient(String dniPatient) {
@@ -123,7 +167,6 @@ public class PatientDAO {
             return false;
         }
     }
-
 
     //Lista de pacientes que tienen que una intervención quirúrgica
     public static ArrayList<Patient> getSurgicalOperation() {
